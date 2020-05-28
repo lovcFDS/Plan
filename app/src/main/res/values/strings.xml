@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Plan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_item_about_text">通过这次的Android期末作品考试，使我学到了很多的东西，掌握了不少没见过的技术。为以后的学习打下坚实的基础。</string>
+    <string name="my_email">guanghuifff@qq.com</string>
+    <string name="about_item_mail_text">如果你在使用的过程中发现了什么不适合的地方，或者发现了什么Bug，或想对作者提出一些意见建议，请向下面的邮箱发送邮件。</string>
+</resources>

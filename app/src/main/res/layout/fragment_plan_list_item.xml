@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_margin="20dp"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/list_item_check"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/list_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="5.17"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center_vertical"
+        android:textSize="12sp"
+        />
+    <TextView
+        android:id="@+id/list_item_todo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="拉裤链"
+        android:layout_marginLeft="15dp"
+        android:textSize="18sp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"/>
+    <Button
+        android:id="@+id/list_item_delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/delete"/>
+
+</LinearLayout>
