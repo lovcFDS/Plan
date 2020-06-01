@@ -177,7 +177,7 @@ public class PlanListFragment extends Fragment {
                     int year = calendar.get(Calendar.YEAR);
                     int month = calendar.get(Calendar.MONTH);
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
-                    String dateString = ""+ year + "." + month+ "." + day;
+                    String dateString = ""+ year + "." + (month+1) + "." + day;
                     map.put(KEY_TIME, dateString);
                     map.put(KEY_TODO, todo_info);
                     todoListItems.add(map);
