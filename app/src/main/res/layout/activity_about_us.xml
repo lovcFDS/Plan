@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="程序参考微信小程序:Todo计划清单"
+            android:text="小组成员：史代超，徐秀云，郑乔慧"
             android:textSize="14sp" />
 
         <TextView

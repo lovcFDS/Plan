@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,10 +44,12 @@ public class PlanTimeFragment extends Fragment {
     private ImageButton btnSoundControl;
 
     private Map<String, Object> map = new HashMap<String, Object>();
-    private int learnMinutes , resetMinutes = 5;
+    private int learnMinutes = 25, resetMinutes = 5;
 
     private CountDownTimer timer;
     private MediaPlayer player;
+
+    private boolean isMute = false;
 
     public PlanTimeFragment() {
         // Required empty public constructor
@@ -73,7 +76,16 @@ public class PlanTimeFragment extends Fragment {
         btnLearn.setOnClickListener(btnClickListener);
         btnSoundControl.setOnClickListener(btnClickListener);
 
-        todoFinish(R.id.fragment_tine_btn_finish);
+        //设置进度条
+        pbTime.setProgress(0);
+        //设置learn rest按钮，输入框可见
+        btnLearn.setVisibility(View.VISIBLE);
+        btnRest.setVisibility(View.VISIBLE);
+        edTodo.setVisibility(View.VISIBLE);
+        //设置finish按钮，提示Tv 不可见
+        btnFinish.setVisibility(View.GONE);
+        tvContext.setVisibility(View.GONE);
+        btnSoundControl.setVisibility(View.GONE);
 
         return view;
     }
@@ -82,7 +94,7 @@ public class PlanTimeFragment extends Fragment {
     public void onResume()
     {
         super.onResume();
-        //读取用户信息，
+        //读取用户设置信息，因为需要获得实时的配置，所以放在onResume
         try{
             FileInputStream f_in_finish = getActivity().openFileInput(PlanTimeFragment.filename);
             ObjectInputStream ois_finish = new ObjectInputStream(f_in_finish);
@@ -101,6 +113,17 @@ public class PlanTimeFragment extends Fragment {
         }catch (Exception e)
         {
             e.printStackTrace();
+        }
+        if(player != null)
+        {
+            if(player.isPlaying())
+            {
+                btnSoundControl.setImageResource(R.drawable.sound);
+            }
+            else
+            {
+                btnSoundControl.setImageResource(R.drawable.mute);
+            }
         }
         tvTime.setText(""+ learnMinutes +":00");
     }
@@ -136,8 +159,9 @@ public class PlanTimeFragment extends Fragment {
                     {
                         tvContext.setText("学习");
                     }
-                    //开启背景音乐
-                    startMusic();
+                    if(!isMute) {//开启背景音乐
+                        startMusic();
+                    }
                     //设置时间框的时间，开启定时
                     tvTime.setText(""+ learnMinutes +":00");
                     setTimer(learnMinutes,resId);
@@ -154,17 +178,11 @@ public class PlanTimeFragment extends Fragment {
                     //读取输入框
                     String inputStr = edTodo.getText().toString();
                     edTodo.setText("");
-                    //输入不为空
-                    if(!inputStr.equals(""))
-                    {
-                        tvContext.setText("休息："+inputStr);
+                    //显示计划
+                    tvContext.setText("休息："+inputStr);
+                    if(!isMute) {//开启背景音乐
+                        startMusic();
                     }
-                    else
-                    {
-                        tvContext.setText("休息");
-                    }
-                    //开启背景音乐
-                    startMusic();
                     //设置时间框的时间，开启定时
                     tvTime.setText(""+ resetMinutes +":00");
                     setTimer(resetMinutes, resId);
@@ -176,11 +194,13 @@ public class PlanTimeFragment extends Fragment {
                     if(player.isPlaying())
                     {
                         player.pause();
+                        isMute = true;
                         btnSoundControl.setImageResource(R.drawable.mute);
                     }
                     else
                     {
                         player.start();
+                        isMute = false;
                         btnSoundControl.setImageResource(R.drawable.sound);
                     }
                     break;
@@ -190,6 +210,12 @@ public class PlanTimeFragment extends Fragment {
 
     private void todoFinish(int resId)
     {
+        //震动一下
+        Vibrator vibrator = (Vibrator)getActivity().getSystemService(getActivity().VIBRATOR_SERVICE);
+        long[] patter = {500, 1000};
+        vibrator.vibrate(patter, -1);
+
+
         if(timer != null)
             timer.cancel();
         if(player != null)
@@ -198,7 +224,7 @@ public class PlanTimeFragment extends Fragment {
             {
                 player.stop();
             }
-            player.release();
+
         }
 
         if(resId == R.id.fragment_time_btn_learn || resId == R.id.fragment_tine_btn_finish)
