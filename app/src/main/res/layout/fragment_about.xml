@@ -23,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/about_user_ic_icon"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_margin="5dp"
                 android:padding="5dp"
                 android:scaleType="centerCrop"

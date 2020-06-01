@@ -218,9 +218,8 @@ public class PlanTimeFragment extends Fragment {
             }
 
         }
+        tvTime.setText(""+ learnMinutes +":00");
 
-        if(resId == R.id.fragment_time_btn_learn || resId == R.id.fragment_tine_btn_finish)
-            tvTime.setText(""+ learnMinutes +":00");
 
         //设置进度条
         pbTime.setProgress(0);
@@ -245,7 +244,17 @@ public class PlanTimeFragment extends Fragment {
                 public void onTick(long millisUntilFinished) {
                     int sec = (int) (millisUntilFinished/1000);
                     int minute = sec/60;
-                    tvTime.setText("" + minute + ":" + (sec%60));
+                    sec = sec%60;
+                    String secStr;
+                    if(sec < 10)
+                    {
+                        secStr = "0" + sec;
+                    }
+                    else
+                    {
+                        secStr = "" + sec;
+                    }
+                    tvTime.setText("" + minute + ":" + secStr);
                     pbTime.setMax(millisFuture/1000);
                     pbTime.setProgress((int) (millisUntilFinished/1000));
                 }
