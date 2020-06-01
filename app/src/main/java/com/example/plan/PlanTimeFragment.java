@@ -150,15 +150,7 @@ public class PlanTimeFragment extends Fragment {
                     //读取输入框
                     String inputTodo = edTodo.getText().toString();
                     edTodo.setText("");
-                    //输入不为空
-                    if(!inputTodo.equals(""))
-                    {
-                        tvContext.setText("学习："+inputTodo);
-                    }
-                    else
-                    {
-                        tvContext.setText("学习");
-                    }
+                    tvContext.setText("学习："+inputTodo);
                     if(!isMute) {//开启背景音乐
                         startMusic();
                     }
