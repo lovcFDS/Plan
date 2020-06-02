@@ -327,12 +327,6 @@ public class PlanListFragment extends Fragment {
 
     private class FragmentListAdapter extends BaseAdapter {
 
-        //map key定义
-        public static final String filename = "plan_datas";
-        public static final String KEY_TODO = "todo";
-        public static final String KEY_TIME = "time";
-        public static final String KEY_ISEND = "isEnd";
-
         private LayoutInflater layoutInflater;
         private Context context;
 
