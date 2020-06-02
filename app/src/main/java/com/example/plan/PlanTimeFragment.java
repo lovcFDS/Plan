@@ -199,7 +199,7 @@ public class PlanTimeFragment extends Fragment {
             }
         }
     };
-
+    //计时完成
     private void todoFinish(int resId)
     {
         //震动一下
@@ -233,6 +233,7 @@ public class PlanTimeFragment extends Fragment {
         btnSoundControl.setVisibility(View.GONE);
     }
 
+    //设置定时器
     private void setTimer(final int minutes, final int resId)
     {
         if(minutes > 0)
@@ -267,6 +268,7 @@ public class PlanTimeFragment extends Fragment {
             timer.start();
         }
     }
+    //开启音乐
     private void startMusic()
     {
         player = MediaPlayer.create(getContext(), R.raw.back_music);
